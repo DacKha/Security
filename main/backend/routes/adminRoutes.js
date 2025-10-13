@@ -1,7 +1,7 @@
-const express = require("express");
-const { loginAdmin } = require("../controllers/adminController");
+import express from "express";
+import { loginAdmin } from "../controllers/adminController.js";
 const router = express.Router();
 
 // API đăng nhập admin
 router.post("/login", loginAdmin);
-module.exports = router;
+export default router;

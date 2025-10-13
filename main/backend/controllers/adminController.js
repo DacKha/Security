@@ -1,7 +1,7 @@
-const jwt = require("jsonwebtoken");
+import jwt from "jsonwebtoken";
 
 // API login admin
-const loginAdmin = async (req, res) => {
+export const loginAdmin = async (req, res) => {
   const { username, password } = req.body;
 
   try {
@@ -23,5 +23,3 @@ const loginAdmin = async (req, res) => {
     res.status(500).json({ message: "Lỗi server", error: error.message });
   }
 };
-
-module.exports = { loginAdmin };
