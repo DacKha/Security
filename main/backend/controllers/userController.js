@@ -138,18 +138,12 @@ export const verifyOtp = async (req, res) => {
 
     // Ghi nhận trên blockchain
     try {
-      // ❌ Lưu ý: Cần wallet address thực từ MetaMask, không phải address từ form
-      console.log("⚠️ Backend không thể gọi registerVoter() trực tiếp");
-      console.log(
-        "⚠️ User cần tự gọi registerVoter() từ frontend với MetaMask"
-      );
-
-      // TODO: Frontend cần tích hợp MetaMask và gọi contract.registerVoter()
-      console.log(
-        "✅ Database registration successful - blockchain pending user action"
-      );
+      const tx = await electionContract.registerVoter();
+      await tx.wait();
+      console.log("✅ Blockchain registration successful");
     } catch (bcErr) {
       console.error("⚠️ Blockchain error (non-critical):", bcErr);
+      // Không trả lỗi nếu blockchain fail, chỉ log
     }
 
     return res.json({
